@@ -9,55 +9,63 @@ using UnityEngine.InputSystem;
 public class RumbleMassage : MonoBehaviour
 {
 	// **Data Fields**
-	PlayerInput inputSystem;
-
-	private Gamepad massager;
+	[SerializeField]
+	private MassagePattern currentMassage;
 	private bool isMassaging = false;
 
-	// **Properties**
-	public PlayerInput InputSystem { get => inputSystem; set => inputSystem = value; }
 
-	public Gamepad Massager { get => massager; set => massager = value; }
+	// **Properties**
+	public MassagePattern CurrentMassage { get => currentMassage; set => currentMassage = value; }
 	public bool IsMassaging { get => isMassaging; set => isMassaging = value; }
 
-	// **Constructors**
-
 	// **Private Methods**
-	private Gamepad GetGamepad()
-	{
-		return Gamepad.all.FirstOrDefault(g => InputSystem.devices.Any(d => d.deviceId == g.deviceId));
-	}
-	
-	private void StartMassage()
-	{
-		Massager.SetMotorSpeeds(1, 1);
-	}
-	private void StopMassage()
-	{
-		Massager.SetMotorSpeeds(0, 0);
-	}
-
-	// **Public Methods**
 	private void Awake()
 	{
-		InputSystem = GetComponent<PlayerInput>();
+		CurrentMassage.Initialize(GetComponent<PlayerInput>());
 	}
-	private void Update()
-	{
-		Massager = GetGamepad();
-	}
-
 	private void OnDestroy()
 	{
-		Massager.SetMotorSpeeds(0, 0);
+		CurrentMassage.StopMassage();
 	}
+
+	private void Update()
+	{
+		CurrentMassage.DoMassage();
+	}
+	// **Public Methods**
+
 	// **Events**
 	public void OnStart()
 	{
-		StartMassage();
+		if (!isMassaging)
+		{
+			CurrentMassage.StartMassage();
+			isMassaging = true;
+		}
 	}
 	public void OnStop()
 	{
-		StopMassage();
+		if (isMassaging)
+		{
+			CurrentMassage.StopMassage();
+			isMassaging = false;
+		}
 	}
+
+	//public void OnIncreaseHigh()
+	//{
+	//	HighSpeed += .1f;
+	//}
+	//public void OnDecreaseHigh()
+	//{
+	//	HighSpeed -= .1f;
+	//}
+	//public void OnIncreaseLow()
+	//{
+	//	LowSpeed += .1f;
+	//}
+	//public void OnDecreaseLow()
+	//{
+	//	LowSpeed -= .1f;
+	//}
 }

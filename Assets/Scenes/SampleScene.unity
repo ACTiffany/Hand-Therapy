@@ -216,6 +216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1929519723}
   - component: {fileID: 1929519724}
+  - component: {fileID: 1929519725}
   m_Layer: 0
   m_Name: Massager
   m_TagString: Untagged
@@ -261,9 +262,26 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: ea68bf37-0624-4fc1-ad99-45a9995832f6
+    m_ActionName: PlayerControls/StartStop[/XInputControllerWindows/buttonWest]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: PlayerControls
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &1929519725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929519722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b94096264a784ea489dc96897dc62063, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentMassage: {fileID: 11400000, guid: bbd245a76f9535b4aa7690ee1cce6714, type: 2}
